@@ -48,3 +48,37 @@ void task2()
         if (nums[j] > sum / i) cout << nums[j] << " ";
     cout << endl;
 }
+
+void task3()
+{
+    cout << "Please enter one of the following choices:\n"
+            "c) carnival\tp) pianist\n"
+            "t) tree\t\tg)game" << endl;
+
+    char c;
+    cin >> c;
+    while (c)
+        switch (c)
+        {
+            case 'c':
+                cout << "A maple is a carnival." << endl;
+                c = 0;
+                break;
+            case 'p':
+                cout << "A maple is a pianist." << endl;
+                c = 0;
+                break;
+            case 't':
+                cout << "A maple is a tree." << endl;
+                c = 0;
+                break;
+            case 'g':
+                cout << "A maple is a game." << endl;
+                c = 0;
+                break;
+            default:
+                cout << "Please enter a c, p, t, or g: ";
+                cin >> c;
+                break;
+        }
+}
