@@ -4,12 +4,14 @@
 #include <array>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::array;
 using std::string;
+using std::ifstream;
 
 void task1()
 {
@@ -306,4 +308,28 @@ void task7()
     cout << countVowels << " words beginning with vowels" << endl;
     cout << countConsonants << " words beginning with consonants" << endl;
     cout << countOther << " othes" << endl;
+}
+
+void task8()
+{
+    ifstream in;
+    in.open("out.txt");
+    if (!in.is_open())
+    {
+        cout << "Всё плохо!" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    char c;
+    int count = 0;
+    in.get(c);
+    while (in.good())
+    {
+        count++;
+        in.get(c);
+    }
+    in.close();
+
+    cout << "Количество символов в файле: " << count << endl;
+
 }
