@@ -2,12 +2,14 @@
 #include <cctype>
 #include <iostream>
 #include <array>
+#include <string>
 #include <fstream>
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::array;
+using std::string;
 
 void task1()
 {
@@ -156,4 +158,152 @@ void task4()
     }
 
     cout << "Bye!" << endl;
+}
+
+void task5()
+{
+    const double ZERO = 0;
+    const double ONE = 0.10;
+    const double TWO = 0.15;
+    const double TREE = 0.20;
+    const int TWOTRAPS = 20000;
+    const int ONETRAPS = 10000;
+    const int ZEROTRAPS = 5000;
+    const int TREETRAPS = 35000;
+
+    int tip = 0;
+    double traps, sum = 0, tips = 0;
+    cin >> traps;
+
+    while (traps >= 0 && cin)
+    {
+        sum += traps;
+        cin >> traps;
+    }
+
+    while (sum > 0)
+    {
+        if (tip == 0)
+        {
+            if (sum - ZEROTRAPS > 0 )
+            {
+                tips += ZEROTRAPS * ZERO;
+                sum -= ZEROTRAPS;
+                tip++;
+            }
+            else
+            {
+                tips += sum * ZERO;
+                sum = 0;
+            }
+
+        }
+        else if (tip == 1)
+        {
+            if (sum - ONETRAPS > 0 )
+            {
+                tips += ONETRAPS * ONE;
+                sum -= ONETRAPS;
+                tip++;
+            }
+            else
+            {
+                tips += sum * ONE;
+                sum = 0;
+            }
+        }
+        else if (tip == 2)
+        {
+            if (sum - TWOTRAPS > 0 )
+            {
+                tips += TWOTRAPS * TWO;
+                sum -= TWOTRAPS;
+                tip++;
+            }
+            else
+            {
+                tips += sum * TWO;
+                sum = 0;
+            }
+        }
+        else
+        {
+            tips += sum * TREE;
+            sum = 0;
+        }
+    }
+
+    cout << "Налог за год: " << tips << endl;
+}
+
+void task6()
+{
+    struct Mecenat
+    {
+        string name;
+        double payment;
+    };
+
+    int n;
+    cout << "Введите количество меценатов: ";
+    cin >> n;
+    Mecenat* mecenat = new Mecenat[n];
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Имя мецената №" << i + 1 << ": ";
+        cin >> (mecenat + i)->name;
+        cout << "Сумма пожертвования мецената №" << i + 1 << ": ";
+        cin >> (mecenat + i)->payment;
+    }
+
+    bool ok = true;
+    cout << "Grand Patrons" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        if ((mecenat + i)->payment >= 10000)
+        {
+            ok = false;
+            cout << (mecenat + i)->name << " " << (mecenat + i)->payment << endl;
+        }
+
+    }
+    if (ok) cout << "none" << endl;
+
+    cout << "Patrons" << endl;
+    ok = true;
+    for (int i = 0; i < n; i++)
+    {
+        if ((mecenat + i)->payment < 10000)
+        {
+            ok = false;
+            cout << (mecenat + i)->name << " " << (mecenat + i)->payment <<endl;
+        }
+    }
+    if (ok) cout << "none" << endl;
+
+    delete [] mecenat;
+}
+
+void task7()
+{
+    const string VOWELS = {"aeuio"};
+
+    cout << "Enter words (q to quit):" << endl;
+    int countVowels = 0, countConsonants = 0, countOther = 0;
+    string word;
+    cin >> word;
+    while (word != "q")
+    {
+        if (isalpha(word[0]))
+            if (VOWELS.find(word[0]) == -1)
+                countConsonants++;
+            else
+                countVowels++;
+        else countOther++;
+        cin >> word;
+    }
+
+    cout << countVowels << " words beginning with vowels" << endl;
+    cout << countConsonants << " words beginning with consonants" << endl;
+    cout << countOther << " othes" << endl;
 }
