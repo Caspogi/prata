@@ -82,3 +82,78 @@ void task3()
                 break;
         }
 }
+
+void task4()
+{
+    const int STRSIZE = 128;
+    const int BOPSIZE = 5;
+
+    struct Bop
+    {
+        char fullname[STRSIZE];
+        char title[STRSIZE];
+        char bopname[STRSIZE];
+        int preference;
+    };
+
+    array<Bop, BOPSIZE> bops
+    {{
+        {"Bob", "Midle", "Boby", 2},
+        {"Piter", "Junior", "Stenly", 1},
+        {"Stan", "Junior", "Orb", 1},
+        {"Olga", "Senior", "MegaO", 0},
+        {"Janny", "Team leader", "MegaDrive", 2},
+    }};
+
+    cout << "a. display by name\tb. display by title\n"
+            "c. display by bopname\td. display by preference\n"
+            "q. quit" << endl;
+
+    cout << "Enter your choice: ";
+    char c;
+
+    cin >> c;
+    while (c != 'q')
+    {
+        switch (c)
+        {
+            case 'a':
+                for (auto bop : bops)
+                    cout << bop.fullname << endl;
+                break;
+
+            case 'b':
+                for (auto bop : bops)
+                    cout << bop.title << endl;
+                break;
+
+            case 'c':
+                for (auto bop : bops)
+                    cout << bop.bopname << endl;
+                break;
+
+            case 'd':
+                for (auto bop : bops)
+                    switch (bop.preference)
+                    {
+                        case 0:
+                            cout << bop.fullname << endl;
+                            break;
+
+                        case 1:
+                            cout << bop.title << endl;
+                            break;
+
+                        case 2:
+                            cout << bop.bopname << endl;
+                            break;
+                    }
+                break;
+        }
+
+    cout << "Enter your choice: ";
+    cin >> c;
+    }
+
+    cout << "Bye!" << endl;
+}
