@@ -1,16 +1,14 @@
 #include "solution.hpp"
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 
 using std::ofstream;
+using std::ifstream;
 
 int main()
 {
-    ofstream outFile;
-    outFile.open("out.txt");
+    task1();
 
-    double x = 0.1;
-    outFile << x << std::endl;
-    outFile.close();
     return 0;
 }
