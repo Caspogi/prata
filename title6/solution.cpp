@@ -349,7 +349,7 @@ void task9()
     }
 
     int n = 0;
-    in >> n;
+    (in >> n).get();
     if (n == 0 || in.eof())
     {
         cout << "Файл пуст" << endl;
@@ -365,7 +365,8 @@ void task9()
     for (int i = 0; i < n; i++)
     {
         getline(in, mecenat[i].name);
-        in >> mecenat[i].payment;
+
+        (in >> mecenat[i].payment).get();
     }
 
     in.close();
