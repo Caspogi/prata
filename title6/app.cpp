@@ -2,7 +2,7 @@
 
 int main()
 {
-    task8();
+    task9();
 
     return 0;
 }

@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include <vector>
 
 using std::cout;
 using std::cin;
@@ -12,6 +13,24 @@ using std::endl;
 using std::array;
 using std::string;
 using std::ifstream;
+using std::vector;
+using std::getline;
+
+const int STRSIZE = 128;
+
+struct Bop
+{
+    char fullname[STRSIZE];
+    char title[STRSIZE];
+    char bopname[STRSIZE];
+    int preference;
+};
+
+struct Mecenat
+{
+    string name;
+    double payment;
+};
 
 void task1()
 {
@@ -89,16 +108,7 @@ void task3()
 
 void task4()
 {
-    const int STRSIZE = 128;
     const int BOPSIZE = 5;
-
-    struct Bop
-    {
-        char fullname[STRSIZE];
-        char title[STRSIZE];
-        char bopname[STRSIZE];
-        int preference;
-    };
 
     array<Bop, BOPSIZE> bops
     {{
@@ -240,12 +250,6 @@ void task5()
 
 void task6()
 {
-    struct Mecenat
-    {
-        string name;
-        double payment;
-    };
-
     int n;
     cout << "Введите количество меценатов: ";
     cin >> n;
@@ -332,4 +336,62 @@ void task8()
 
     cout << "Количество символов в файле: " << count << endl;
 
+}
+
+void task9()
+{
+    ifstream in;
+    in.open("in.txt");
+    if (!in.is_open())
+    {
+        cout << "Всё плохо!" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int n = 0;
+    in >> n;
+    if (n == 0 || in.eof())
+    {
+        cout << "Файл пуст" << endl;
+        exit(EXIT_FAILURE);
+    }
+    else if (in.fail())
+    {
+        cout << "Ввод прекращен из-за несоответствия типов";
+        exit(EXIT_FAILURE);
+    }
+
+    vector<Mecenat> mecenat(n);
+    for (int i = 0; i < n; i++)
+    {
+        getline(in, mecenat[i].name);
+        in >> mecenat[i].payment;
+    }
+
+    in.close();
+
+    bool ok = true;
+    cout << "Grand Patrons" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        if (mecenat[i].payment >= 10000)
+        {
+            ok = false;
+            cout << mecenat[i].name << " " << mecenat[i].payment << endl;
+        }
+
+    }
+    if (ok) cout << "none" << endl;
+
+    cout << "Patrons" << endl;
+    ok = true;
+    for (int i = 0; i < n; i++)
+    {
+        if (mecenat[i].payment < 10000)
+        {
+            ok = false;
+            cout << mecenat[i].name << " " << mecenat[i].payment << endl;
+        }
+    }
+    if (ok) cout << "none" << endl;
 }
